@@ -72,19 +72,18 @@ class EventHandler {
 
   registerEvents() {
     const instance = this._instance;
-    const client = this._client;
 
     for (const eventName of this._eventCallbacks.keys()) {
       const functions = this._eventCallbacks.get(eventName);
 
-      this._client.on(eventName, async function () {
+      this._client.on(eventName, async () => {
         for (const [func, dynamicValidation] of functions) {
           if (dynamicValidation && !(await dynamicValidation(...arguments))) {
             continue;
           }
 
           func({
-            client,
+            client: this._client,
             ...arguments,
             instance
           });
