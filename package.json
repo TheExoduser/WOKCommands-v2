@@ -4,6 +4,8 @@
   "main": "./dist/index.js",
   "typings": "./typings.d.ts",
   "scripts": {
+    "prepare": "npm run build-ts",
+    "build-ts": "tsc --outDir dist --rootDir src --skipLibCheck",
     "tsc": "tsc -w --outDir dist --rootDir src --skipLibCheck"
   },
   "keywords": [],
