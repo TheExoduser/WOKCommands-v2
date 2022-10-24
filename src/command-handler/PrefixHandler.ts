@@ -10,7 +10,8 @@ class PrefixHandler {
   constructor(instance: WOK) {
     this._instance = instance;
 
-    this.loadPrefixes();
+    // Skip prefix loading, handled by custom bot
+    // this.loadPrefixes();
   }
 
   private async loadPrefixes() {
@@ -38,12 +39,15 @@ class PrefixHandler {
   }
 
   public async set(guildId: string, prefix: string) {
+    /*
     if (!this._instance.isConnectedToDB) {
       return;
     }
+    */
 
     this._prefixes.set(guildId, prefix);
 
+    /*
     await guildPrefixSchema.findOneAndUpdate(
       {
         _id: guildId,
@@ -56,6 +60,7 @@ class PrefixHandler {
         upsert: true,
       }
     );
+     */
   }
 }
 
