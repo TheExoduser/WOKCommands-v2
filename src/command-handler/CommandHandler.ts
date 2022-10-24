@@ -228,7 +228,27 @@ class CommandHandler {
       };
     }
 
-    return await callback(usage);
+    const callResult = await callback(usage);
+
+    this._instance.emit("commandExecuted", {
+      command,
+      member: member,
+      guild: guild,
+      channel: channel,
+      message: {
+        guild: guild,
+        // @ts-ignore
+        author: member.user,
+      },
+      args: args,
+      // @ts-ignore
+      text: text,
+      client: this._client,
+      instance: this._instance,
+      interaction,
+    });
+
+    return callResult;
   }
 
   private getValidations(folder?: string) {
