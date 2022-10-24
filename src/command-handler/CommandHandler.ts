@@ -88,6 +88,10 @@ class CommandHandler {
 
     for (let fileData of [...defaultCommands, ...files]) {
       const { filePath } = fileData;
+
+      // Skip if not js file
+      if (!filePath.endsWith(".js")) continue;
+
       const commandObject: CommandObject = fileData.fileContents;
 
       const split = filePath.split(/[\/\\]/);
