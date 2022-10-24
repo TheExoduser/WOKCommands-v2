@@ -1,12 +1,13 @@
 import { Client } from "discord.js";
 import mongoose from "mongoose";
+import { EventEmitter } from 'events'
 
 import CommandHandler from "./command-handler/CommandHandler";
 import EventHandler from "./event-handler/EventHandler";
 import WOK, { Events, Options, Validations } from "../typings";
 import Cooldowns from "./util/Cooldowns";
 
-class WOKCommands {
+class WOKCommands extends EventEmitter {
   private _client!: Client;
   private _testServers!: string[];
   private _botOwners!: string[];
@@ -18,6 +19,8 @@ class WOKCommands {
   private _isConnectedToDB = false;
 
   constructor(options: Options) {
+    super();
+
     this.init(options);
   }
 

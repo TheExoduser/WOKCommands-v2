@@ -11,8 +11,9 @@ import {
 import CommandType from "./src/util/CommandType";
 import CooldownTypes from "./src/util/CooldownTypes";
 import Cooldowns from "./src/util/Cooldowns";
+import { EventEmitter } from 'events'
 
-export default class WOK {
+export default class WOK extends EventEmitter {
   private _client!: Client;
   private _testServers!: string[];
   private _botOwners!: string[];
