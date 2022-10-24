@@ -72,6 +72,7 @@ class EventHandler {
 
   registerEvents() {
     const instance = this._instance;
+    const client = this._client;
 
     for (const eventName of this._eventCallbacks.keys()) {
       const functions = this._eventCallbacks.get(eventName);
@@ -82,7 +83,11 @@ class EventHandler {
             continue;
           }
 
-          func(...arguments, instance);
+          func({
+            client,
+            ...arguments,
+            instance
+          });
         }
       });
     }
