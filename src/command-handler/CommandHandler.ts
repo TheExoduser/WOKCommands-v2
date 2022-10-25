@@ -246,7 +246,7 @@ class CommandHandler {
       },
       args: args,
       // @ts-ignore
-      text: text,
+      text: args.join(" "),
       client: this._client,
       instance: this._instance,
       interaction,
