@@ -104,6 +104,7 @@ export interface CommandObject {
   type: CommandType;
   init?: function;
   description?: string;
+  name: string;
   aliases?: string[];
   testOnly?: boolean;
   guildOnly?: boolean;
@@ -127,10 +128,9 @@ export type FileData = {
 };
 
 export class Command {
-  constructor(instance: WOK, commandName: string, commandObject: CommandObject);
+  constructor(instance: WOK, commandObject: CommandObject);
 
   public get instance(): WOK;
-  public get commandName(): string;
   public get commandObject(): CommandObject;
 }
 
