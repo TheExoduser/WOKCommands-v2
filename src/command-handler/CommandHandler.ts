@@ -125,7 +125,7 @@ class CommandHandler {
           }
         }
 
-        return;
+        continue;
       }
 
       for (const validation of validations) {
