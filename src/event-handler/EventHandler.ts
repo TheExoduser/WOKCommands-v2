@@ -76,17 +76,17 @@ class EventHandler {
     for (const eventName of this._eventCallbacks.keys()) {
       const functions = this._eventCallbacks.get(eventName);
 
-      this._client.on(eventName, async () => {
+      this._client.on(eventName, async (...params) => {
         for (const [func, dynamicValidation] of functions) {
-          if (dynamicValidation && !(await dynamicValidation(...arguments))) {
+          if (dynamicValidation && !(await dynamicValidation(...params))) {
             continue;
           }
 
-          func({
-            client: this._client,
-            ...arguments,
+          func(
+            ...params,
+            this._client,
             instance
-          });
+          );
         }
       });
     }
