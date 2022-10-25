@@ -5,6 +5,7 @@ import CommandType from "../../util/CommandType";
 import { CommandObject, CommandUsage } from "../../../typings";
 
 export default {
+  name: "channelcommand",
   description: "Specifies what commands can be ran inside of what channels",
 
   type: CommandType.SLASH,

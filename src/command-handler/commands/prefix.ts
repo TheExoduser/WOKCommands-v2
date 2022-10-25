@@ -4,6 +4,7 @@ import CommandType from "../../util/CommandType";
 import { CommandObject, CommandUsage } from "../../../typings";
 
 export default {
+  name: "prefix",
   description: "Sets the prefix for this server",
 
   minArgs: 1,

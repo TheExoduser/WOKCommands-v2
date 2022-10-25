@@ -12,6 +12,7 @@ import Command from "../Command";
 const noCommands = "No custom commands configured.";
 
 export default {
+  name: "customcommand",
   description: "Creates a custom command",
   type: CommandType.SLASH,
   guildOnly: true,

@@ -6,6 +6,7 @@ import { CommandObject, CommandUsage } from "../../../typings";
 import Command from "../Command";
 
 export default {
+  name: "requiredroles",
   description: "Sets what commands require what roles",
 
   type: CommandType.SLASH,

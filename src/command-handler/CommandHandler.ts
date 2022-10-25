@@ -95,33 +95,32 @@ class CommandHandler {
       const commandObject: CommandObject = fileData.fileContents;
 
       const split = filePath.split(/[\/\\]/);
-      let commandName = split.pop()!;
-      commandName = commandName.split(".")[0];
 
-      const command = new Command(this._instance, commandName, commandObject);
+      const command = new Command(this._instance, commandObject);
 
       const {
-        description,
-        type,
-        testOnly,
-        delete: del,
-        aliases = [],
+          description,
+          type,
+          testOnly,
+          delete: del,
+          aliases = [],
+          name,
         init = () => {},
       } = commandObject;
 
       if (
         del ||
         this._instance.disabledDefaultCommands.includes(
-          commandName.toLowerCase()
+          name.toLowerCase()
         )
       ) {
         if (type === "SLASH" || type === "BOTH") {
           if (testOnly) {
             for (const guildId of this._instance.testServers) {
-              this._slashCommands.delete(command.commandName, guildId);
+              this._slashCommands.delete(name, guildId);
             }
           } else {
-            this._slashCommands.delete(command.commandName);
+            this._slashCommands.delete(name);
           }
         }
 
@@ -134,10 +133,10 @@ class CommandHandler {
 
       await init(this._client, this._instance);
 
-      const names = [command.commandName, ...aliases];
+      const names = [name, ...aliases];
 
-      for (const name of names) {
-        this._commands.set(name, command);
+      for (const n of names) {
+        this._commands.set(n, command);
       }
 
       if (type === "SLASH" || type === "BOTH") {
@@ -148,7 +147,7 @@ class CommandHandler {
         if (testOnly) {
           for (const guildId of this._instance.testServers) {
             this._slashCommands.create(
-              command.commandName,
+              name,
               description!,
               options,
               guildId
@@ -156,7 +155,7 @@ class CommandHandler {
           }
         } else {
           this._slashCommands.create(
-            command.commandName,
+            name,
             description!,
             options
           );

@@ -5,6 +5,7 @@ import CommandType from "../../util/CommandType";
 import { CommandUsage } from "../../../typings";
 
 export default {
+  name: "togglecommand",
   description: "Toggles a command on or off for your guild",
 
   type: CommandType.SLASH,

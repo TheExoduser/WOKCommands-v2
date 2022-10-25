@@ -8,6 +8,7 @@ import Command from "../Command";
 const clearAllPermissions = "Clear All Permissions";
 
 export default {
+  name: "requiredpermissions",
   description: "Sets what commands require what permissions",
 
   type: CommandType.SLASH,
