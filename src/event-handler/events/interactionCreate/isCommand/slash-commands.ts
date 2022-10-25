@@ -1,8 +1,8 @@
-import { CommandInteraction } from "discord.js";
+import { CommandInteraction, Client } from "discord.js";
 
 import WOK from "../../../../../typings";
 
-export default async (interaction: CommandInteraction, instance: WOK) => {
+export default async (interaction: CommandInteraction, client: Client, instance: WOK) => {
   const { commandHandler } = instance;
   if (!commandHandler) {
     return;
