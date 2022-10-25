@@ -1,8 +1,8 @@
-import { Message } from "discord.js";
+import { Client, Message } from "discord.js";
 
 import WOK from "../../../../../typings";
 
-export default async (message: Message, instance: WOK) => {
+export default async (message: Message, client: Client, instance: WOK) => {
   const { guild, content } = message;
 
   const { commandHandler } = instance;
@@ -30,6 +30,7 @@ export default async (message: Message, instance: WOK) => {
 
   if (deferReply) {
     message.channel.sendTyping();
+    await message.react("🕑");
   }
 
   const response = await commandHandler.runCommand(
@@ -38,6 +39,11 @@ export default async (message: Message, instance: WOK) => {
     message,
     null
   );
+
+  if (deferReply) {
+    await message.reactions.removeAll();
+  }
+
   if (!response) {
     return;
   }
