@@ -10,9 +10,19 @@ export default async (interaction: CommandInteraction, client: Client, instance:
 
   const { commands, customCommands } = commandHandler;
 
-  const args = interaction.options.data.map(({ value }) => {
-    return String(value);
-  });
+  let args: string[] = [];
+
+  // @ts-ignore
+  if (!interaction.options.getSubcommand()) {
+    args = interaction.options.data.map(({ value }) => {
+      return String(value);
+    });
+  } else if (interaction.options.data.length > 0) {
+    args = interaction.options.data[0].options?.map(({ value }) => {
+      return String(value);
+    }) || [];
+  }
+
 
   const command = commands.get(interaction.commandName);
   if (!command) {
