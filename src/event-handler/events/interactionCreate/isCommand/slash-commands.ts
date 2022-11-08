@@ -13,7 +13,7 @@ export default async (interaction: CommandInteraction, client: Client, instance:
   let args: string[] = [];
 
   // @ts-ignore
-  if (!interaction.options.getSubcommand()) {
+  if (!interaction.options.getSubcommand(false)) {
     args = interaction.options.data.map(({ value }) => {
       return String(value);
     });
