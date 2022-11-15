@@ -97,7 +97,13 @@ class CommandHandler {
 
       const split = filePath.split(/[\/\\]/);
 
-      const command = new Command(this._instance, commandObject);
+      let command;
+      try {
+        command = new Command(this._instance, commandObject);
+      } catch (ex) {
+        console.log(`Error loading command "${filePath}":`, ex);
+        continue;
+      }
 
       const {
           description,
