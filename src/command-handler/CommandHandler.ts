@@ -254,11 +254,7 @@ class CommandHandler {
       member: member,
       guild: guild,
       channel: channel,
-      message: {
-        guild: guild,
-        // @ts-ignore
-        author: member.user,
-      },
+      message,
       args: args,
       // @ts-ignore
       text: args.join(" "),
