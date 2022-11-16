@@ -7,13 +7,6 @@ export default async (interaction: CommandInteraction, client: Client, instance:
   if (!commandHandler) {
     return;
   }
-  if (!interaction.guild) return interaction.reply({
-    embeds: [
-      new EmbedBuilder()
-          .setTitle("\:x: Error")
-          .setDescription("Commands are only supported on servers!")
-    ]
-  });
 
   const { commands, customCommands } = commandHandler;
 

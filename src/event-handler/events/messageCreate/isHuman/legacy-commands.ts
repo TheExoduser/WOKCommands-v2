@@ -26,14 +26,6 @@ export default async (message: Message, client: Client, instance: WOK) => {
     return;
   }
 
-  if (!message.guild) return message.reply({
-    embeds: [
-      new EmbedBuilder()
-          .setTitle("\:x: Error")
-          .setDescription("Commands are only supported on servers!")
-    ]
-  });
-
   const { reply, deferReply } = command.commandObject;
 
   if (deferReply) {
