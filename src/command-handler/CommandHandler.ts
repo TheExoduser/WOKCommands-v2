@@ -249,7 +249,7 @@ class CommandHandler {
 
     const callResult = await callback(usage);
 
-    this._instance.emit("commandExecuted", {
+    this._client.emit("commandExecuted", {
       command,
       member: member,
       guild: guild,
