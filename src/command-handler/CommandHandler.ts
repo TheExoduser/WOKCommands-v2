@@ -184,7 +184,8 @@ class CommandHandler {
     command: Command,
     args: string[],
     message: Message | null,
-    interaction: CommandInteraction | null
+    interaction: CommandInteraction | null,
+    fullCommand: string,
   ) {
     const { callback, type, cooldowns } = command.commandObject;
 
@@ -251,12 +252,12 @@ class CommandHandler {
 
     this._client.emit("commandExecuted", {
       command,
+      fullCommand,
       member: member,
       guild: guild,
       channel: channel,
       message,
       args: args,
-      // @ts-ignore
       text: args.join(" "),
       client: this._client,
       instance: this._instance,
