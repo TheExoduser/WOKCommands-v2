@@ -252,7 +252,7 @@ class CommandHandler {
 
     this._client.emit("commandExecuted", {
       command,
-      fullCommand,
+      fullCommand: fullCommand,
       member: member,
       guild: guild,
       channel: channel,

@@ -176,7 +176,7 @@ class CommandHandler {
         const callResult = await callback(usage);
         this._client.emit("commandExecuted", {
             command,
-            fullCommand,
+            fullCommand: fullCommand,
             member: member,
             guild: guild,
             channel: channel,
