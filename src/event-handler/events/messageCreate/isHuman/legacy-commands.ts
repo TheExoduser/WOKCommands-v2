@@ -29,8 +29,10 @@ export default async (message: Message, client: Client, instance: WOK) => {
     const { reply, deferReply } = command.commandObject;
 
     if (deferReply) {
-        message.channel.sendTyping();
-        await message.react("🕑");
+        try {
+            message.channel.sendTyping();
+            await message.react("🕑");
+        } catch (ex) {}
     }
 
     const response = await commandHandler.runCommand(
@@ -42,7 +44,9 @@ export default async (message: Message, client: Client, instance: WOK) => {
     );
 
     if (deferReply) {
-        await message.reactions.removeAll();
+        try {
+            await message.reactions.removeAll();
+        } catch (ex) {}
     }
 
     if (!response) {

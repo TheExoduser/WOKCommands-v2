@@ -20,12 +20,18 @@ exports.default = async (message, client, instance) => {
     }
     const { reply, deferReply } = command.commandObject;
     if (deferReply) {
-        message.channel.sendTyping();
-        await message.react("🕑");
+        try {
+            message.channel.sendTyping();
+            await message.react("🕑");
+        }
+        catch (ex) { }
     }
     const response = await commandHandler.runCommand(command, args, message, null, command.commandObject.name);
     if (deferReply) {
-        await message.reactions.removeAll();
+        try {
+            await message.reactions.removeAll();
+        }
+        catch (ex) { }
     }
     if (!response) {
         return;
