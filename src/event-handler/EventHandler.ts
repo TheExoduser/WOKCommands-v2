@@ -4,6 +4,9 @@ import path from "path";
 import getAllFiles from "../util/get-all-files.js";
 import WOK, { Events } from "../../typings.js";
 
+import * as url from 'url';
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
 class EventHandler {
   // <eventName, array of [function, dynamic validation functions]>
   private _eventCallbacks = new Map();

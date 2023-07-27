@@ -1,6 +1,8 @@
 import { InteractionType } from "discord.js";
 import path from "path";
 import getAllFiles from "../util/get-all-files.js";
+import * as url from 'url';
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 class EventHandler {
     // <eventName, array of [function, dynamic validation functions]>
     _eventCallbacks = new Map();
