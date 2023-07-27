@@ -22,12 +22,13 @@ import WOK, {
 } from "../../typings.js";
 import DefaultCommands from "../util/DefaultCommands.js";
 
+import * as url from 'url';
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
 class CommandHandler {
   // <commandName, instance of the Command class>
   private _commands: Map<string, Command> = new Map();
-  private _validations = this.getValidations(
-    path.join(__dirname, "validations", "runtime")
-  );
+  private _validations: any;
   private _instance: WOK;
   private _client: Client;
   private _commandsDir: string;
@@ -47,12 +48,7 @@ class CommandHandler {
     this._disabledCommands = new DisabledCommands(instance);
     this._prefixes = new PrefixHandler(instance);
 
-    this._validations = [
-      ...this._validations,
-      ...this.getValidations(instance.validations?.runtime),
-    ];
-
-    this.readFiles();
+    this.loadValidations(instance).then(() => this.readFiles());
   }
 
   public get commands() {
@@ -79,12 +75,23 @@ class CommandHandler {
     return this._prefixes;
   }
 
+  private async loadValidations(instance: WOK) {
+    this._validations = await this.getValidations(
+        path.join(__dirname, "validations", "runtime")
+    );
+
+    this._validations = [
+      ...this._validations,
+      ...(await this.getValidations(instance.validations?.runtime)),
+    ];
+  }
+
   private async readFiles() {
-    const defaultCommands = getAllFiles(path.join(__dirname, "./commands"));
-    const files = getAllFiles(this._commandsDir);
+    const defaultCommands = await getAllFiles(path.join(__dirname, "./commands"));
+    const files = await getAllFiles(this._commandsDir);
     const validations = [
-      ...this.getValidations(path.join(__dirname, "validations", "syntax")),
-      ...this.getValidations(this._instance.validations?.syntax),
+      ...(await this.getValidations(path.join(__dirname, "validations", "syntax"))),
+      ...(await this.getValidations(this._instance.validations?.syntax)),
     ];
 
     for (let fileData of [...defaultCommands, ...files]) {
@@ -263,12 +270,12 @@ class CommandHandler {
     return callResult;
   }
 
-  private getValidations(folder?: string) {
+  private async getValidations(folder?: string) {
     if (!folder) {
       return [];
     }
 
-    return getAllFiles(folder).map((fileData) => fileData.fileContents);
+    return (await getAllFiles(folder)).map((fileData) => fileData.fileContents);
   }
 }
 

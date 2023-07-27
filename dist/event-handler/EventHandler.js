@@ -28,11 +28,11 @@ class EventHandler {
         this.registerEvents();
     }
     async readFiles() {
-        const defaultEvents = getAllFiles(path.join(__dirname, "events"), true);
-        const folders = this._eventsDir ? getAllFiles(this._eventsDir, true) : [];
+        const defaultEvents = await getAllFiles(path.join(__dirname, "events"), true);
+        const folders = this._eventsDir ? await getAllFiles(this._eventsDir, true) : [];
         for (const { filePath: folderPath } of [...defaultEvents, ...folders]) {
             const event = folderPath.split(/[\/\\]/g).pop();
-            const files = getAllFiles(folderPath);
+            const files = await getAllFiles(folderPath);
             const functions = this._eventCallbacks.get(event) || [];
             for (const { filePath, fileContents } of files) {
                 const isBuiltIn = !folderPath.includes(this._eventsDir);

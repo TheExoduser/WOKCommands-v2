@@ -8,7 +8,7 @@ class FeaturesHandler {
   }
 
   private async readFiles(instance: WOK, featuresDir: string, client: Client) {
-    const files = getAllFiles(featuresDir)
+    const files = await getAllFiles(featuresDir)
 
     for (const file of files) {
       let func = require(file.filePath)
