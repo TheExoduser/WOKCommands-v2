@@ -4,12 +4,10 @@ class Command {
     _instance;
     _commandName;
     _commandObject;
-    constructor(instance, commandObject) {
+    constructor(instance, commandName, commandObject) {
         this._instance = instance;
+        this._commandName = commandName.toLowerCase();
         this._commandObject = commandObject;
-        if (!this._commandObject.name)
-            throw new Error("Command is missing a name!");
-        this._commandName = this._commandObject.name.toLowerCase();
     }
     get instance() {
         return this._instance;

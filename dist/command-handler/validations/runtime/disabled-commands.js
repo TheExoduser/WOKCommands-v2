@@ -7,11 +7,13 @@ exports.default = async (command, usage) => {
         return true;
     }
     if (instance.commandHandler.disabledCommands.isDisabled(guild.id, commandName)) {
-        const text = "This command is disabled";
-        if (message)
-            message.channel.send(text);
-        else if (interaction)
-            interaction.reply(text);
+        const content = 'This command is disabled';
+        if (message) {
+            message.channel.send({ content });
+        }
+        else if (interaction) {
+            interaction.reply({ content, ephemeral: true });
+        }
         return false;
     }
     return true;

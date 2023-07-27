@@ -72,14 +72,9 @@ class CommandHandler {
                 continue;
             const commandObject = fileData.fileContents;
             const split = filePath.split(/[\/\\]/);
-            let command;
-            try {
-                command = new Command_1.default(this._instance, commandObject);
-            }
-            catch (ex) {
-                console.log(`Error loading command "${filePath}":`, ex);
-                continue;
-            }
+            let commandName = split.pop();
+            commandName = commandName.split(".")[0];
+            const command = new Command_1.default(this._instance, commandName, commandObject);
             const { description, type, testOnly, delete: del, aliases = [], name, init = () => { }, } = commandObject;
             let defaultCommandValue;
             for (const [key, value] of Object.entries(DefaultCommands_1.default)) {

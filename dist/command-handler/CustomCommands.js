@@ -27,7 +27,7 @@ class CustomCommands {
     getCommands(guildId) {
         const commands = [];
         for (const [key] of this._customCommands) {
-            const [id, commandName] = key.split("-");
+            const [id, commandName] = key.split('-');
             if (id === guildId) {
                 commands.push(commandName);
             }
@@ -72,10 +72,12 @@ class CustomCommands {
         if (!response) {
             return;
         }
-        if (message)
+        if (message) {
             message.channel.send(response).catch(() => { });
-        else if (interaction)
+        }
+        else if (interaction) {
             interaction.reply(response).catch(() => { });
+        }
     }
 }
 exports.default = CustomCommands;

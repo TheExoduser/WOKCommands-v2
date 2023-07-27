@@ -17,10 +17,13 @@ exports.default = async (interaction, client, instance) => {
     const focusedOption = interaction.options.getFocused(true);
     const choices = await autocomplete(command, focusedOption.name, interaction);
     const filtered = choices
-        .filter((choice) => choice.toLowerCase().startsWith(focusedOption.value.toLowerCase()))
+        .filter((choice) => {
+        const choiceName = choice.name || choice;
+        return choiceName.toLowerCase().includes(focusedOption.value.toLowerCase());
+    })
         .slice(0, 25);
     await interaction.respond(filtered.map((choice) => ({
-        name: choice,
-        value: choice,
+        name: choice.name || choice,
+        value: choice.value || choice,
     })));
 };

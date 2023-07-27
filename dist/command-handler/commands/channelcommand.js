@@ -6,10 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 const CommandType_1 = __importDefault(require("../../util/CommandType"));
 exports.default = {
-    name: "channelcommand",
     description: "Specifies what commands can be ran inside of what channels",
     type: CommandType_1.default.SLASH,
     guildOnly: true,
+    permissions: [discord_js_1.PermissionFlagsBits.Administrator],
     options: [
         {
             name: "command",
@@ -23,6 +23,7 @@ exports.default = {
             description: "The channel to use for this command",
             required: true,
             type: discord_js_1.ApplicationCommandOptionType.Channel,
+            channelTypes: [discord_js_1.ChannelType.GuildText],
         },
     ],
     autocomplete: (command) => {

@@ -19,12 +19,13 @@ class WOKCommands extends events_1.EventEmitter {
     _commandHandler;
     _eventHandler;
     _isConnectedToDB = false;
+    _defaultPrefix = '!';
     constructor(options) {
         super();
         this.init(options);
     }
     async init(options) {
-        let { client, mongoUri, commandsDir, featuresDir, testServers = [], botOwners = [], cooldownConfig, disabledDefaultCommands = [], events = {}, validations = {}, } = options;
+        let { client, mongoUri, commandsDir, featuresDir, testServers = [], botOwners = [], cooldownConfig, disabledDefaultCommands = [], events = {}, validations = {}, defaultPrefix, } = options;
         if (!client) {
             throw new Error('A client is required.');
         }
@@ -50,6 +51,9 @@ class WOKCommands extends events_1.EventEmitter {
             dbRequired: 300,
             ...cooldownConfig,
         });
+        if (defaultPrefix) {
+            this._defaultPrefix = defaultPrefix;
+        }
         if (commandsDir) {
             this._commandHandler = new CommandHandler_1.default(this, commandsDir, client);
         }
@@ -84,6 +88,9 @@ class WOKCommands extends events_1.EventEmitter {
     }
     get isConnectedToDB() {
         return this._isConnectedToDB;
+    }
+    get defaultPrefix() {
+        return this._defaultPrefix;
     }
     async connectToMongo(mongoUri) {
         await mongoose_1.default.connect(mongoUri, {

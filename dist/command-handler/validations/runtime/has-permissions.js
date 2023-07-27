@@ -9,14 +9,16 @@ const keys = Object.keys(discord_js_1.PermissionFlagsBits);
 exports.default = async (command, usage) => {
     const { permissions = [] } = command.commandObject;
     const { instance, guild, member, message, interaction } = usage;
-    if (!member || !instance.isConnectedToDB) {
+    if (!member) {
         return true;
     }
-    const document = await required_permissions_schema_1.default.findById(`${guild.id}-${command.commandName}`);
-    if (document) {
-        for (const permission of document.permissions) {
-            if (!permissions.includes(permission)) {
-                permissions.push(permission);
+    if (instance.isConnectedToDB) {
+        const document = await required_permissions_schema_1.default.findById(`${guild.id}-${command.commandName}`);
+        if (document) {
+            for (const permission of document.permissions) {
+                if (!permissions.includes(permission)) {
+                    permissions.push(permission);
+                }
             }
         }
     }
@@ -32,11 +34,18 @@ exports.default = async (command, usage) => {
             }
         }
         if (missingPermissions.length) {
-            const text = `You are missing the following permissions: "${missingPermissions.join('", "')}"`;
-            if (message)
-                message.reply(text);
-            else if (interaction)
-                interaction.reply(text);
+            const content = `You are missing the following permissions: "${missingPermissions.join('", "')}"`;
+            if (message) {
+                message.reply({
+                    content,
+                });
+            }
+            else if (interaction) {
+                interaction.reply({
+                    content,
+                    ephemeral: true,
+                });
+            }
             return false;
         }
     }

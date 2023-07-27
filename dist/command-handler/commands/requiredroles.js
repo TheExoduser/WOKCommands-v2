@@ -7,11 +7,10 @@ const discord_js_1 = require("discord.js");
 const required_roles_schema_1 = __importDefault(require("../../models/required-roles-schema"));
 const CommandType_1 = __importDefault(require("../../util/CommandType"));
 exports.default = {
-    name: "requiredroles",
     description: "Sets what commands require what roles",
     type: CommandType_1.default.SLASH,
     guildOnly: true,
-    roles: [discord_js_1.PermissionFlagsBits.Administrator],
+    permissions: [discord_js_1.PermissionFlagsBits.Administrator],
     options: [
         {
             name: "command",
@@ -49,9 +48,7 @@ exports.default = {
         const _id = `${guild.id}-${command.commandName}`;
         if (!role) {
             const document = await required_roles_schema_1.default.findById(_id);
-            const roles = document && document.roles?.length
-                ? document.roles.map((roleId) => `<@&${roleId}>`)
-                : "None.";
+            const roles = document && document.roles?.length ? document.roles.map((roleId) => `<@&${roleId}>`) : "None.";
             return {
                 content: `Here are the roles for "${commandName}": ${roles}`,
                 ephemeral: true,

@@ -27,11 +27,14 @@ exports.default = async (command, usage) => {
             allowedMentions: {
                 roles: [],
             },
+            ephemeral: true,
         };
-        if (message)
+        if (message) {
             message.reply(reply);
-        else if (interaction)
+        }
+        else if (interaction) {
             interaction.reply(reply);
+        }
         return false;
     }
     return true;

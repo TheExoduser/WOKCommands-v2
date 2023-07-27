@@ -20,16 +20,33 @@ class SlashCommands {
         return commands;
     }
     areOptionsDifferent(options, existingOptions) {
-        for (let a = 0; a < options.length; ++a) {
+        if (options.length !== existingOptions.length)
+            return true;
+        let different = false;
+        for (let a = 0; a < existingOptions.length; ++a) {
             const option = options[a];
             const existing = existingOptions[a];
-            if (option.name !== existing.name ||
-                option.type !== existing.type ||
-                option.description !== existing.description) {
-                return true;
-            }
+            Object.entries(existing).forEach(([key, value]) => {
+                const existingElement = existing[key] ? existing[key] : false;
+                const optionElement = option[key] ? option[key] : false;
+                if (key == "options" &&
+                    existingElement !== false &&
+                    optionElement !== false) {
+                    for (let i = 0; i < existing.options.length; ++i) {
+                        const existingOption = existing.options[i];
+                        const addOption = option.options[i];
+                        if (JSON.stringify(existingOption) === JSON.stringify(addOption)) {
+                            different = true;
+                        }
+                    }
+                }
+                else if (String(existingElement) !== String(optionElement)) {
+                    different = true;
+                }
+            });
+            continue;
         }
-        return false;
+        return different;
     }
     async create(name, description, options, guildId) {
         const commands = await this.getCommands(guildId);
@@ -40,7 +57,6 @@ class SlashCommands {
         if (existingCommand) {
             const { description: existingDescription, options: existingOptions } = existingCommand;
             if (description !== existingDescription ||
-                options.length !== existingOptions.length ||
                 this.areOptionsDifferent(options, existingOptions)) {
                 console.log(`Updating the command "${name}"`);
                 await commands.edit(existingCommand.id, {

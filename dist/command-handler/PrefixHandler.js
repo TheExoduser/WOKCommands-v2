@@ -7,7 +7,6 @@ const guild_prefix_schema_1 = __importDefault(require("../models/guild-prefix-sc
 class PrefixHandler {
     // <guildId: prefix>
     _prefixes = new Map();
-    _defaultPrefix = "!";
     _instance;
     constructor(instance) {
         this._instance = instance;
@@ -24,7 +23,7 @@ class PrefixHandler {
         }
     }
     get defaultPrefix() {
-        return this._defaultPrefix;
+        return this._instance.defaultPrefix;
     }
     get(guildId) {
         if (!guildId) {
