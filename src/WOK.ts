@@ -19,6 +19,7 @@ class WOKCommands extends EventEmitter {
   private _commandHandler: CommandHandler | undefined
   private _eventHandler!: EventHandler
   private _isConnectedToDB = false
+  private _defaultPrefix = '!'
 
   constructor(options: Options) {
     super();
@@ -38,6 +39,7 @@ class WOKCommands extends EventEmitter {
       disabledDefaultCommands = [],
       events = {},
       validations = {},
+      defaultPrefix,
     } = options
 
     if (!client) {
@@ -69,6 +71,10 @@ class WOKCommands extends EventEmitter {
       dbRequired: 300, // 5 minutes
       ...cooldownConfig,
     })
+
+    if (defaultPrefix) {
+      this._defaultPrefix = defaultPrefix
+    }
 
     if (commandsDir) {
       this._commandHandler = new CommandHandler(
@@ -123,6 +129,10 @@ class WOKCommands extends EventEmitter {
 
   public get isConnectedToDB(): boolean {
     return this._isConnectedToDB
+  }
+
+  public get defaultPrefix(): string {
+    return this._defaultPrefix
   }
 
   private async connectToMongo(mongoUri: string) {

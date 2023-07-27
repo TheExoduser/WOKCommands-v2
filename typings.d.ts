@@ -6,6 +6,8 @@ import {
   GuildMember,
   TextChannel,
   User,
+  Message,
+  ChatInputCommandInteraction,
 } from 'discord.js'
 
 import CommandType from './src/util/CommandType'
@@ -24,6 +26,7 @@ export default class WOK extends EventEmitter {
   private _commandHandler: CommandHandler | undefined
   private _eventHandler!: EventHandler
   private _isConnectedToDB = false
+  private _defaultPrefix = '!'
 
   constructor(options: Options)
 
@@ -36,6 +39,7 @@ export default class WOK extends EventEmitter {
   public get commandHandler(): CommandHandler
   public get eventHandler(): EventHandler
   public get isConnectedToDB(): boolean
+  public get defaultPrefix(): string
 }
 
 export interface Options {
@@ -49,6 +53,7 @@ export interface Options {
   disabledDefaultCommands?: DefaultCommands[]
   events?: Events
   validations?: Validations
+  defaultPrefix?: string
 }
 
 export interface CooldownConfig {
@@ -68,7 +73,7 @@ export interface Validations {
 }
 
 export class Cooldowns {
-  constructor(instance: WOK, oldownConfig: CooldownConfig) {}
+  constructor(instance: WOK, cooldownConfig: CooldownConfig) {}
 }
 
 export interface CooldownUsage {
@@ -90,7 +95,7 @@ export interface CommandUsage {
   client: Client
   instance: WOK
   message?: Message | null
-  interaction?: CommandInteraction | null
+  interaction?: ChatInputCommandInteraction | null
   args: string[]
   text: string
   guild?: Guild | null
@@ -102,31 +107,36 @@ export interface CommandUsage {
 }
 
 export interface CommandObject {
-  callback: function;
-  type: CommandType;
-  init?: function;
-  description?: string;
-  name: string;
-  aliases?: string[];
-  testOnly?: boolean;
-  guildOnly?: boolean;
-  ownerOnly?: boolean;
-  permissions?: bigint[];
-  deferReply?: "ephemeral" | boolean;
-  cooldowns?: CooldownUsage;
-  minArgs?: number;
-  maxArgs?: number;
-  correctSyntax?: string;
-  expectedArgs?: string;
-  options?: ApplicationCommandOption[];
-  autocomplete?: function;
-  reply?: boolean;
-  delete?: boolean;
+  callback: (commandUsage: CommandUsage) => unknown
+  type: CommandType
+  init?: function
+    description?: string
+    name: string
+  aliases?: string[]
+  testOnly?: boolean
+  guildOnly?: boolean
+  ownerOnly?: boolean
+  permissions?: bigint[]
+  deferReply?: 'ephemeral' | boolean
+  cooldowns?: CooldownUsage
+  minArgs?: number
+  maxArgs?: number
+  correctSyntax?: string
+  expectedArgs?: string
+  options?: ApplicationCommandOption[]
+  autocomplete?: function
+  reply?: boolean
+  delete?: boolean
 }
 
 export type FileData = {
   filePath: string
   fileContents: any
+}
+
+export type AutocompleteChoice = {
+  name?: string,
+  value?: string,
 }
 
 export class Command {

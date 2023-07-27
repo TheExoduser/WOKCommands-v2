@@ -1,17 +1,17 @@
 {
   "name": "wokcommands",
-  "version": "2.0.3",
+  "version": "2.1.9",
   "main": "./dist/index.js",
   "typings": "./typings.d.ts",
   "scripts": {
-    "build-ts": "tsc --outDir dist --rootDir src --skipLibCheck",
-    "tsc": "tsc -w --outDir dist --rootDir src --skipLibCheck"
+    "tsc": "tsc -w --outDir dist --rootDir src --skipLibCheck",
+    "npmp": "tsc --outDir dist --rootDir src --skipLibCheck && npm publish"
   },
   "keywords": [],
   "author": "Alexzander Flores, WornOffKeys.com",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^14.3.0",
+    "discord.js": "^14.11.0",
     "dotenv": "^16.0.2",
     "mongoose": "^6.6.1"
   },

@@ -1,6 +1,6 @@
 import {
+  ChatInputCommandInteraction,
   Client,
-  CommandInteraction,
   GuildMember,
   Message,
   TextChannel,
@@ -96,14 +96,10 @@ class CommandHandler {
       const commandObject: CommandObject = fileData.fileContents;
 
       const split = filePath.split(/[\/\\]/);
+      let commandName = split.pop()!;
+      commandName = commandName.split(".")[0];
 
-      let command;
-      try {
-        command = new Command(this._instance, commandObject);
-      } catch (ex) {
-        console.log(`Error loading command "${filePath}":`, ex);
-        continue;
-      }
+      const command = new Command(this._instance, commandName, commandObject)
 
       const {
           description,
@@ -184,7 +180,7 @@ class CommandHandler {
     command: Command,
     args: string[],
     message: Message | null,
-    interaction: CommandInteraction | null,
+    interaction: ChatInputCommandInteraction | null,
     fullCommand: string,
   ) {
     const { callback, type, cooldowns } = command.commandObject;
