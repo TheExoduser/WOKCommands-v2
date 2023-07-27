@@ -1,4 +1,5 @@
-import { Schema, model, models } from "mongoose";
+import mong from "mongoose";
+const { Schema, model, models } = mong;
 
 const requiredPermissionsSchema = new Schema({
   // guildId-commandName
