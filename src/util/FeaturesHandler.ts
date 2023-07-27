@@ -1,6 +1,6 @@
 import { Client } from 'discord.js'
-import WOK from '../../typings'
-import getAllFiles from './get-all-files'
+import WOK from '../../typings.js'
+import getAllFiles from './get-all-files.js'
 
 class FeaturesHandler {
   constructor(instance: WOK, featuresDir: string, client: Client) {

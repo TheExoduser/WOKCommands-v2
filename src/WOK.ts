@@ -2,12 +2,12 @@ import { Client } from 'discord.js'
 import mongoose from 'mongoose'
 import { EventEmitter } from 'events'
 
-import CommandHandler from './command-handler/CommandHandler'
-import EventHandler from './event-handler/EventHandler'
-import WOK, { Events, Options, Validations } from '../typings'
-import Cooldowns from './util/Cooldowns'
-import DefaultCommands from './util/DefaultCommands'
-import FeaturesHandler from './util/FeaturesHandler'
+import CommandHandler from './command-handler/CommandHandler.js'
+import EventHandler from './event-handler/EventHandler.js'
+import WOK, { Events, Options, Validations } from '../typings.js'
+import Cooldowns from './util/Cooldowns.js'
+import DefaultCommands from './util/DefaultCommands.js'
+import FeaturesHandler from './util/FeaturesHandler.js'
 
 class WOKCommands extends EventEmitter {
   private _client!: Client

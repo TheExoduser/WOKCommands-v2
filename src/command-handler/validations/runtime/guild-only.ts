@@ -1,5 +1,5 @@
-import Command from '../../Command'
-import { CommandUsage } from '../../../../typings'
+import Command from '../../Command.js'
+import { CommandUsage } from '../../../../typings.js'
 
 export default (command: Command, usage: CommandUsage) => {
   const { guildOnly } = command.commandObject

@@ -1,21 +1,16 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const discord_js_1 = require("discord.js");
-const CommandType_1 = __importDefault(require("../../util/CommandType"));
-exports.default = {
+import { PermissionFlagsBits, ApplicationCommandOptionType } from "discord.js";
+import CommandType from "../../util/CommandType.js";
+export default {
     name: "togglecommand",
     description: "Toggles a command on or off for your guild",
-    type: CommandType_1.default.SLASH,
+    type: CommandType.SLASH,
     guildOnly: true,
-    permissions: [discord_js_1.PermissionFlagsBits.Administrator],
+    permissions: [PermissionFlagsBits.Administrator],
     options: [
         {
             name: "command",
             description: "The command to toggle on or off",
-            type: discord_js_1.ApplicationCommandOptionType.String,
+            type: ApplicationCommandOptionType.String,
             required: true,
             autocomplete: true,
         },

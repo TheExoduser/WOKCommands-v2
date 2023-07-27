@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (command) => {
+export default (command) => {
     const { commandObject, commandName } = command;
     const { guildOnly, permissions = [] } = commandObject;
     if (guildOnly !== true && permissions.length) {

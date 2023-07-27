@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = async (interaction, client, instance) => {
+export default async (interaction, client, instance) => {
     const { commandHandler } = instance;
     if (!commandHandler) {
         return;

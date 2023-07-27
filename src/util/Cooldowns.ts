@@ -1,6 +1,6 @@
-import cooldownSchema from "../models/cooldown-schema";
-import CooldownTypes from "../util/CooldownTypes";
-import WOK, { CooldownConfig, InternalCooldownConfig } from "../../typings";
+import cooldownSchema from "../models/cooldown-schema.js";
+import CooldownTypes from "../util/CooldownTypes.js";
+import WOK, { CooldownConfig, InternalCooldownConfig } from "../../typings.js";
 
 const cooldownDurations = {
   s: 1,

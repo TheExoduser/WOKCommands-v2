@@ -1,5 +1,10 @@
-import cooldownSchema from "../models/cooldown-schema.js";
-import CooldownTypes from "../util/CooldownTypes.js";
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const cooldown_schema_1 = __importDefault(require("../models/cooldown-schema"));
+const CooldownTypes_1 = __importDefault(require("../util/CooldownTypes"));
 const cooldownDurations = {
     s: 1,
     m: 60,
@@ -24,10 +29,10 @@ class Cooldowns {
         if (!this._instance.isConnectedToDB) {
             return;
         }
-        await cooldownSchema.deleteMany({
+        await cooldown_schema_1.default.deleteMany({
             expires: { $lt: new Date() },
         });
-        const results = await cooldownSchema.find({});
+        const results = await cooldown_schema_1.default.find({});
         for (const result of results) {
             const { _id, expires } = result;
             this._cooldowns.set(_id, expires);
@@ -41,7 +46,7 @@ class Cooldowns {
         const key = this.getKeyFromCooldownUsage(cooldownUsage);
         this._cooldowns.delete(key);
         if (this._instance.isConnectedToDB) {
-            await cooldownSchema.deleteOne({ _id: key });
+            await cooldown_schema_1.default.deleteOne({ _id: key });
         }
     }
     async updateCooldown(cooldownUsage, expires) {
@@ -53,7 +58,7 @@ class Cooldowns {
         const now = new Date();
         const secondsDiff = (expires.getTime() - now.getTime()) / 1000;
         if (secondsDiff > this._dbRequired) {
-            await cooldownSchema.findOneAndUpdate({
+            await cooldown_schema_1.default.findOneAndUpdate({
                 _id: key,
             }, {
                 _id: key,
@@ -82,10 +87,10 @@ class Cooldowns {
         return quantity * cooldownDurations[type];
     }
     getKey(cooldownType, userId, actionId, guildId) {
-        const isPerUser = cooldownType === CooldownTypes.perUser;
-        const isPerUserPerGuild = cooldownType === CooldownTypes.perUserPerGuild;
-        const isPerGuild = cooldownType === CooldownTypes.perGuild;
-        const isGlobal = cooldownType === CooldownTypes.global;
+        const isPerUser = cooldownType === CooldownTypes_1.default.perUser;
+        const isPerUserPerGuild = cooldownType === CooldownTypes_1.default.perUserPerGuild;
+        const isPerGuild = cooldownType === CooldownTypes_1.default.perGuild;
+        const isGlobal = cooldownType === CooldownTypes_1.default.global;
         if ((isPerUserPerGuild || isPerGuild) && !guildId) {
             throw new Error(`Invalid cooldown type "${cooldownType}" used outside of a guild.`);
         }
@@ -116,7 +121,7 @@ class Cooldowns {
         const expires = new Date();
         expires.setSeconds(expires.getSeconds() + seconds);
         if (this._instance.isConnectedToDB && seconds >= this._dbRequired) {
-            await cooldownSchema.findOneAndUpdate({
+            await cooldown_schema_1.default.findOneAndUpdate({
                 _id: key,
             }, {
                 _id: key,
@@ -158,4 +163,4 @@ class Cooldowns {
         return errorMessage.replace("{TIME}", time);
     }
 }
-export default Cooldowns;
+exports.default = Cooldowns;

@@ -1,7 +1,7 @@
-import WOK from "./WOK";
-import CommandType from "./util/CommandType";
-import CooldownTypes from "./util/CooldownTypes";
-import DefaultCommands from "./util/DefaultCommands";
+import WOK from "./WOK.js";
+import CommandType from "./util/CommandType.js";
+import CooldownTypes from "./util/CooldownTypes.js";
+import DefaultCommands from "./util/DefaultCommands.js";
 
 module.exports = WOK;
 module.exports.CommandType = CommandType;

@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = (command) => {
+export default (command) => {
     const { instance, commandName, commandObject } = command;
     if (commandObject.testOnly !== true || instance.testServers.length) {
         return;

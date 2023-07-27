@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 class Command {
     _instance;
     _commandName;
@@ -19,4 +17,4 @@ class Command {
         return this._commandObject;
     }
 }
-exports.default = Command;
+export default Command;

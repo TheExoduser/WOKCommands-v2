@@ -1,6 +1,6 @@
 import { Client, EmbedBuilder, Message } from "discord.js";
 
-import WOK from "../../../../../typings";
+import WOK from "../../../../../typings.js";
 
 export default async (message: Message, client: Client, instance: WOK) => {
     const { guild, content } = message;

@@ -1,15 +1,10 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const events_1 = require("events");
-const CommandHandler_1 = __importDefault(require("./command-handler/CommandHandler"));
-const EventHandler_1 = __importDefault(require("./event-handler/EventHandler"));
-const Cooldowns_1 = __importDefault(require("./util/Cooldowns"));
-const FeaturesHandler_1 = __importDefault(require("./util/FeaturesHandler"));
-class WOKCommands extends events_1.EventEmitter {
+import mongoose from 'mongoose';
+import { EventEmitter } from 'events';
+import CommandHandler from './command-handler/CommandHandler.js';
+import EventHandler from './event-handler/EventHandler.js';
+import Cooldowns from './util/Cooldowns.js';
+import FeaturesHandler from './util/FeaturesHandler.js';
+class WOKCommands extends EventEmitter {
     _client;
     _testServers;
     _botOwners;
@@ -45,7 +40,7 @@ class WOKCommands extends events_1.EventEmitter {
         this._botOwners = botOwners;
         this._disabledDefaultCommands = disabledDefaultCommands;
         this._validations = validations;
-        this._cooldowns = new Cooldowns_1.default(this, {
+        this._cooldowns = new Cooldowns(this, {
             errorMessage: 'Please wait {TIME} before doing that again.',
             botOwnersBypass: false,
             dbRequired: 300,
@@ -55,12 +50,12 @@ class WOKCommands extends events_1.EventEmitter {
             this._defaultPrefix = defaultPrefix;
         }
         if (commandsDir) {
-            this._commandHandler = new CommandHandler_1.default(this, commandsDir, client);
+            this._commandHandler = new CommandHandler(this, commandsDir, client);
         }
         if (featuresDir) {
-            new FeaturesHandler_1.default(this, featuresDir, client);
+            new FeaturesHandler(this, featuresDir, client);
         }
-        this._eventHandler = new EventHandler_1.default(this, events, client);
+        this._eventHandler = new EventHandler(this, events, client);
     }
     get client() {
         return this._client;
@@ -93,10 +88,10 @@ class WOKCommands extends events_1.EventEmitter {
         return this._defaultPrefix;
     }
     async connectToMongo(mongoUri) {
-        await mongoose_1.default.connect(mongoUri, {
+        await mongoose.connect(mongoUri, {
             keepAlive: true,
         });
         this._isConnectedToDB = true;
     }
 }
-exports.default = WOKCommands;
+export default WOKCommands;

@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var CooldownTypes;
 (function (CooldownTypes) {
     CooldownTypes["perUser"] = "perUser";
@@ -5,4 +7,4 @@ var CooldownTypes;
     CooldownTypes["perGuild"] = "perGuild";
     CooldownTypes["global"] = "global";
 })(CooldownTypes || (CooldownTypes = {}));
-export default CooldownTypes;
+exports.default = CooldownTypes;

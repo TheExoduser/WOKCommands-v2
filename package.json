@@ -3,6 +3,7 @@
   "version": "2.1.9",
   "main": "./dist/index.js",
   "typings": "./typings.d.ts",
+  "type": "module",
   "scripts": {
     "build-ts": "tsc --outDir dist --rootDir src --skipLibCheck",
     "tsc": "tsc -w --outDir dist --rootDir src --skipLibCheck",

@@ -7,20 +7,20 @@ import {
 } from "discord.js";
 import path from "path";
 
-import getAllFiles from "../util/get-all-files";
-import Command from "./Command";
-import SlashCommands from "./SlashCommands";
-import ChannelCommands from "./ChannelCommands";
-import CustomCommands from "./CustomCommands";
-import DisabledCommands from "./DisabledCommands";
-import PrefixHandler from "./PrefixHandler";
-import CommandType from "../util/CommandType";
+import getAllFiles from "../util/get-all-files.js";
+import Command from "./Command.js";
+import SlashCommands from "./SlashCommands.js";
+import ChannelCommands from "./ChannelCommands.js";
+import CustomCommands from "./CustomCommands.js";
+import DisabledCommands from "./DisabledCommands.js";
+import PrefixHandler from "./PrefixHandler.js";
+import CommandType from "../util/CommandType.js";
 import WOK, {
   CommandObject,
   CommandUsage,
   InternalCooldownConfig,
-} from "../../typings";
-import DefaultCommands from "../util/DefaultCommands";
+} from "../../typings.js";
+import DefaultCommands from "../util/DefaultCommands.js";
 
 class CommandHandler {
   // <commandName, instance of the Command class>

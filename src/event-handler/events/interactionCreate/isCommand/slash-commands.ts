@@ -1,6 +1,6 @@
 import { CommandInteraction, Client, EmbedBuilder } from "discord.js";
 
-import WOK from "../../../../../typings";
+import WOK from "../../../../../typings.js";
 
 export default async (interaction: CommandInteraction, client: Client, instance: WOK) => {
     const { commandHandler } = instance;

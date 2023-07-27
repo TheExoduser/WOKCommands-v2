@@ -1,7 +1,7 @@
 import { PermissionFlagsBits } from "discord.js";
 
-import CommandType from "../../util/CommandType";
-import { CommandObject, CommandUsage } from "../../../typings";
+import CommandType from "../../util/CommandType.js";
+import { CommandObject, CommandUsage } from "../../../typings.js";
 
 export default {
   name: "prefix",

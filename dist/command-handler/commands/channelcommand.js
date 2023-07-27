@@ -1,29 +1,24 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const discord_js_1 = require("discord.js");
-const CommandType_1 = __importDefault(require("../../util/CommandType"));
-exports.default = {
+import { ApplicationCommandOptionType, ChannelType, PermissionFlagsBits } from "discord.js";
+import CommandType from "../../util/CommandType.js";
+export default {
     description: "Specifies what commands can be ran inside of what channels",
-    type: CommandType_1.default.SLASH,
+    type: CommandType.SLASH,
     guildOnly: true,
-    permissions: [discord_js_1.PermissionFlagsBits.Administrator],
+    permissions: [PermissionFlagsBits.Administrator],
     options: [
         {
             name: "command",
             description: "The command to restrict to specific channels",
             required: true,
-            type: discord_js_1.ApplicationCommandOptionType.String,
+            type: ApplicationCommandOptionType.String,
             autocomplete: true,
         },
         {
             name: "channel",
             description: "The channel to use for this command",
             required: true,
-            type: discord_js_1.ApplicationCommandOptionType.Channel,
-            channelTypes: [discord_js_1.ChannelType.GuildText],
+            type: ApplicationCommandOptionType.Channel,
+            channelTypes: [ChannelType.GuildText],
         },
     ],
     autocomplete: (command) => {

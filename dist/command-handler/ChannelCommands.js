@@ -1,9 +1,4 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const channel_commands_schema_1 = __importDefault(require("../models/channel-commands-schema"));
+import channelCommands from "../models/channel-commands-schema.js";
 class ChannelCommands {
     // `${guildId}-${commandName}`: [channelIds]
     _channelCommands = new Map();
@@ -16,7 +11,7 @@ class ChannelCommands {
             return;
         }
         const _id = `${guildId}-${commandName}`;
-        const result = await channel_commands_schema_1.default.findOneAndUpdate({
+        const result = await channelCommands.findOneAndUpdate({
             _id,
         }, {
             _id,
@@ -43,11 +38,11 @@ class ChannelCommands {
         const _id = `${guildId}-${commandName}`;
         let channels = this._channelCommands.get(_id);
         if (!channels) {
-            const results = await channel_commands_schema_1.default.findById(_id);
+            const results = await channelCommands.findById(_id);
             channels = results ? results.channels : [];
             this._channelCommands.set(_id, channels);
         }
         return channels;
     }
 }
-exports.default = ChannelCommands;
+export default ChannelCommands;

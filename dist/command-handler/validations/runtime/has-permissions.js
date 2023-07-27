@@ -1,19 +1,14 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const discord_js_1 = require("discord.js");
-const required_permissions_schema_1 = __importDefault(require("../../../models/required-permissions-schema"));
-const keys = Object.keys(discord_js_1.PermissionFlagsBits);
-exports.default = async (command, usage) => {
+import { PermissionFlagsBits } from 'discord.js';
+import requiredPermissions from '../../../models/required-permissions-schema.js';
+const keys = Object.keys(PermissionFlagsBits);
+export default async (command, usage) => {
     const { permissions = [] } = command.commandObject;
     const { instance, guild, member, message, interaction } = usage;
     if (!member) {
         return true;
     }
     if (instance.isConnectedToDB) {
-        const document = await required_permissions_schema_1.default.findById(`${guild.id}-${command.commandName}`);
+        const document = await requiredPermissions.findById(`${guild.id}-${command.commandName}`);
         if (document) {
             for (const permission of document.permissions) {
                 if (!permissions.includes(permission)) {
@@ -29,7 +24,7 @@ exports.default = async (command, usage) => {
             if (!member.permissions.has(permission)) {
                 const permissionName = keys.find(
                 // @ts-ignore
-                (key) => key === permission || discord_js_1.PermissionFlagsBits[key] === permission);
+                (key) => key === permission || PermissionFlagsBits[key] === permission);
                 missingPermissions.push(permissionName);
             }
         }

@@ -1,39 +1,34 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const discord_js_1 = require("discord.js");
-const CommandType_1 = __importDefault(require("../../util/CommandType"));
+import { ApplicationCommandOptionType, PermissionFlagsBits, } from "discord.js";
+import CommandType from "../../util/CommandType.js";
 const noCommands = "No custom commands configured.";
-exports.default = {
+export default {
     name: "customcommand",
     description: "Creates a custom command",
-    type: CommandType_1.default.SLASH,
+    type: CommandType.SLASH,
     guildOnly: true,
-    permissions: [discord_js_1.PermissionFlagsBits.Administrator],
+    permissions: [PermissionFlagsBits.Administrator],
     options: [
         {
             name: "create",
             description: "Creates a custom command",
-            type: discord_js_1.ApplicationCommandOptionType.Subcommand,
+            type: ApplicationCommandOptionType.Subcommand,
             options: [
                 {
                     name: "command",
                     description: "The name of the command",
-                    type: discord_js_1.ApplicationCommandOptionType.String,
+                    type: ApplicationCommandOptionType.String,
                     required: true,
                 },
                 {
                     name: "description",
                     description: "The description of the command",
-                    type: discord_js_1.ApplicationCommandOptionType.String,
+                    type: ApplicationCommandOptionType.String,
                     required: true,
                 },
                 {
                     name: "response",
                     description: "The response of the command",
-                    type: discord_js_1.ApplicationCommandOptionType.String,
+                    type: ApplicationCommandOptionType.String,
                     required: true,
                 },
             ],
@@ -41,12 +36,12 @@ exports.default = {
         {
             name: "delete",
             description: "Deletes a custom command",
-            type: discord_js_1.ApplicationCommandOptionType.Subcommand,
+            type: ApplicationCommandOptionType.Subcommand,
             options: [
                 {
                     name: "command",
                     description: "The name of the command",
-                    type: discord_js_1.ApplicationCommandOptionType.String,
+                    type: ApplicationCommandOptionType.String,
                     required: true,
                     autocomplete: true,
                 },

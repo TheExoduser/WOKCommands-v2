@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var DefaultCommands;
 (function (DefaultCommands) {
     DefaultCommands["ChannelCommand"] = "channelcommand";
@@ -7,4 +9,4 @@ var DefaultCommands;
     DefaultCommands["RequiredRoles"] = "requiredroles";
     DefaultCommands["ToggleCommand"] = "togglecommand";
 })(DefaultCommands || (DefaultCommands = {}));
-export default DefaultCommands;
+exports.default = DefaultCommands;

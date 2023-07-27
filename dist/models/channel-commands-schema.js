@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = require("mongoose");
-const channelCommandSchema = new mongoose_1.Schema({
+import { Schema, model, models } from "mongoose";
+const channelCommandSchema = new Schema({
     // guildId-commandName
     _id: {
         type: String,
@@ -13,4 +11,4 @@ const channelCommandSchema = new mongoose_1.Schema({
     },
 });
 const name = "channel-commands";
-exports.default = mongoose_1.models[name] || (0, mongoose_1.model)(name, channelCommandSchema);
+export default models[name] || model(name, channelCommandSchema);

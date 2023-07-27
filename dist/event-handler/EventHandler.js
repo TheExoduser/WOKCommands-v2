@@ -1,11 +1,6 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const discord_js_1 = require("discord.js");
-const path_1 = __importDefault(require("path"));
-const get_all_files_1 = __importDefault(require("../util/get-all-files"));
+import { InteractionType } from "discord.js";
+import path from "path";
+import getAllFiles from "../util/get-all-files.js";
 class EventHandler {
     // <eventName, array of [function, dynamic validation functions]>
     _eventCallbacks = new Map();
@@ -22,8 +17,8 @@ class EventHandler {
         this._builtInEvents = {
             interactionCreate: {
                 isButton: (interaction) => interaction.isButton(),
-                isCommand: (interaction) => interaction.type === discord_js_1.InteractionType.ApplicationCommand,
-                isAutocomplete: (interaction) => interaction.type === discord_js_1.InteractionType.ApplicationCommandAutocomplete,
+                isCommand: (interaction) => interaction.type === InteractionType.ApplicationCommand,
+                isAutocomplete: (interaction) => interaction.type === InteractionType.ApplicationCommandAutocomplete,
             },
             messageCreate: {
                 isHuman: (message) => !message.author.bot,
@@ -33,11 +28,11 @@ class EventHandler {
         this.registerEvents();
     }
     async readFiles() {
-        const defaultEvents = (0, get_all_files_1.default)(path_1.default.join(__dirname, "events"), true);
-        const folders = this._eventsDir ? (0, get_all_files_1.default)(this._eventsDir, true) : [];
+        const defaultEvents = getAllFiles(path.join(__dirname, "events"), true);
+        const folders = this._eventsDir ? getAllFiles(this._eventsDir, true) : [];
         for (const { filePath: folderPath } of [...defaultEvents, ...folders]) {
             const event = folderPath.split(/[\/\\]/g).pop();
-            const files = (0, get_all_files_1.default)(folderPath);
+            const files = getAllFiles(folderPath);
             const functions = this._eventCallbacks.get(event) || [];
             for (const { filePath, fileContents } of files) {
                 const isBuiltIn = !folderPath.includes(this._eventsDir);
@@ -72,4 +67,4 @@ class EventHandler {
         }
     }
 }
-exports.default = EventHandler;
+export default EventHandler;

@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = require("mongoose");
-const guildPrefixSchema = new mongoose_1.Schema({
+import { Schema, model, models } from "mongoose";
+const guildPrefixSchema = new Schema({
     // guild ID
     _id: {
         type: String,
@@ -13,4 +11,4 @@ const guildPrefixSchema = new mongoose_1.Schema({
     },
 });
 const name = "guild-prefixes";
-exports.default = mongoose_1.models[name] || (0, mongoose_1.model)(name, guildPrefixSchema);
+export default models[name] || model(name, guildPrefixSchema);

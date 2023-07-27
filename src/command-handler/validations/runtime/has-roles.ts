@@ -1,6 +1,6 @@
-import requiredRoles from '../../../models/required-roles-schema'
-import Command from '../../Command'
-import { CommandUsage } from '../../../../typings'
+import requiredRoles from '../../../models/required-roles-schema.js'
+import Command from '../../Command.js'
+import { CommandUsage } from '../../../../typings.js'
 
 export default async (command: Command, usage: CommandUsage) => {
   const { instance, guild, member, message, interaction } = usage

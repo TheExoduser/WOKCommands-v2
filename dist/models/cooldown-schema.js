@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = require("mongoose");
-const cooldownSchema = new mongoose_1.Schema({
+import { Schema, model, models } from "mongoose";
+const cooldownSchema = new Schema({
     // The key from Cooldowns.getKey()
     _id: {
         type: String,
@@ -13,4 +11,4 @@ const cooldownSchema = new mongoose_1.Schema({
     },
 });
 const name = "cooldowns";
-exports.default = mongoose_1.models[name] || (0, mongoose_1.model)(name, cooldownSchema);
+export default models[name] || model(name, cooldownSchema);

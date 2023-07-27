@@ -1,4 +1,4 @@
-import WOK, { CommandObject } from "../../typings";
+import WOK, { CommandObject } from "../../typings.js";
 
 class Command {
   private _instance: WOK;

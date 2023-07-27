@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = require("mongoose");
-const customCommandSchema = new mongoose_1.Schema({
+import { Schema, model, models } from "mongoose";
+const customCommandSchema = new Schema({
     // guildId-commandName
     _id: {
         type: String,
@@ -13,4 +11,4 @@ const customCommandSchema = new mongoose_1.Schema({
     },
 });
 const name = "custom-commands";
-exports.default = mongoose_1.models[name] || (0, mongoose_1.model)(name, customCommandSchema);
+export default models[name] || model(name, customCommandSchema);

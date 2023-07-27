@@ -1,15 +1,10 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const get_all_files_1 = __importDefault(require("./get-all-files"));
+import getAllFiles from './get-all-files.js';
 class FeaturesHandler {
     constructor(instance, featuresDir, client) {
         this.readFiles(instance, featuresDir, client);
     }
     async readFiles(instance, featuresDir, client) {
-        const files = (0, get_all_files_1.default)(featuresDir);
+        const files = getAllFiles(featuresDir);
         for (const file of files) {
             let func = require(file.filePath);
             func = func.default || func;
@@ -19,4 +14,4 @@ class FeaturesHandler {
         }
     }
 }
-exports.default = FeaturesHandler;
+export default FeaturesHandler;

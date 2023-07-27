@@ -1,6 +1,6 @@
 import {AutocompleteInteraction, Client} from "discord.js";
 
-import WOK, { AutocompleteChoice } from "../../../../../typings";
+import WOK, { AutocompleteChoice } from "../../../../../typings.js";
 
 export default async (interaction: AutocompleteInteraction, client: Client, instance: WOK) => {
   const { commandHandler } = instance;

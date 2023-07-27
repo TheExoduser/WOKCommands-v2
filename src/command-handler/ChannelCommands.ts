@@ -1,5 +1,5 @@
-import WOK from "../../typings";
-import channelCommands from "../models/channel-commands-schema";
+import WOK from "../../typings.js";
+import channelCommands from "../models/channel-commands-schema.js";
 
 class ChannelCommands {
   // `${guildId}-${commandName}`: [channelIds]

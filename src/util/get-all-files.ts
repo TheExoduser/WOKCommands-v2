@@ -1,7 +1,10 @@
 import fs from "fs";
 import p from "path";
+import { createRequire } from 'module';
+// @ts-ignore
+const require = createRequire(import.meta.url);
 
-import { FileData } from "../../typings";
+import { FileData } from "../../typings.js";
 
 const getAllFiles = (path: string, foldersOnly = false) => {
   const files = fs.readdirSync(path, {

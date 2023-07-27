@@ -1,8 +1,8 @@
 import { Client, Interaction, InteractionType, Message } from "discord.js";
 import path from "path";
 
-import getAllFiles from "../util/get-all-files";
-import WOK, { Events } from "../../typings";
+import getAllFiles from "../util/get-all-files.js";
+import WOK, { Events } from "../../typings.js";
 
 class EventHandler {
   // <eventName, array of [function, dynamic validation functions]>

@@ -1,8 +1,8 @@
 import { PermissionFlagsBits } from 'discord.js'
 
-import requiredPermissions from '../../../models/required-permissions-schema'
-import Command from '../../Command'
-import { CommandUsage } from '../../../../typings'
+import requiredPermissions from '../../../models/required-permissions-schema.js'
+import Command from '../../Command.js'
+import { CommandUsage } from '../../../../typings.js'
 
 const keys = Object.keys(PermissionFlagsBits)
 

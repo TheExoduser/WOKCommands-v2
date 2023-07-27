@@ -1,8 +1,8 @@
 import { PermissionFlagsBits, ApplicationCommandOptionType } from "discord.js";
 
-import Command from "../Command";
-import CommandType from "../../util/CommandType";
-import { CommandUsage } from "../../../typings";
+import Command from "../Command.js";
+import CommandType from "../../util/CommandType.js";
+import { CommandUsage } from "../../../typings.js";
 
 export default {
   name: "togglecommand",

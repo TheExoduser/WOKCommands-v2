@@ -1,5 +1,5 @@
-import CommandType from "../../../util/CommandType";
-import Command from "../../Command";
+import CommandType from "../../../util/CommandType.js";
+import Command from "../../Command.js";
 
 export default (command: Command) => {
   const { commandName, commandObject } = command;
