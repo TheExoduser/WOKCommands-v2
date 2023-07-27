@@ -4,6 +4,7 @@
   "main": "./dist/index.js",
   "typings": "./typings.d.ts",
   "scripts": {
+    "build-ts": "tsc --outDir dist --rootDir src --skipLibCheck",
     "tsc": "tsc -w --outDir dist --rootDir src --skipLibCheck",
     "npmp": "tsc --outDir dist --rootDir src --skipLibCheck && npm publish"
   },
