@@ -7,14 +7,12 @@ class Command {
 
   constructor(
     instance: WOK,
+    commandName: string,
     commandObject: CommandObject
   ) {
     this._instance = instance;
+    this._commandName = commandName.toLowerCase();
     this._commandObject = commandObject;
-
-    if (!this._commandObject.name) throw new Error("Command is missing a name!");
-
-    this._commandName = this._commandObject.name.toLowerCase();
   }
 
   public get instance() {
