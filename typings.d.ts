@@ -110,8 +110,8 @@ export interface CommandObject {
   callback: (commandUsage: CommandUsage) => unknown
   type: CommandType
   init?: function
-    description?: string
-    name: string
+  description?: string
+  name: string
   aliases?: string[]
   testOnly?: boolean
   guildOnly?: boolean
