@@ -1,6 +1,7 @@
 import { ApplicationCommandOptionType, ChannelType, PermissionFlagsBits } from "discord.js";
 import CommandType from "../../util/CommandType.js";
 export default {
+    name: "channelcommand",
     description: "Specifies what commands can be ran inside of what channels",
     type: CommandType.SLASH,
     guildOnly: true,

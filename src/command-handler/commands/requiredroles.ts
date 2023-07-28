@@ -6,6 +6,7 @@ import { CommandObject, CommandUsage } from "../../../typings.js";
 import Command from "../Command.js";
 
 export default {
+	name: "requiredroles",
 	description: "Sets what commands require what roles",
 
 	type: CommandType.SLASH,

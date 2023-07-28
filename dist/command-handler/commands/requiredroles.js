@@ -2,6 +2,7 @@ import { PermissionFlagsBits, ApplicationCommandOptionType } from "discord.js";
 import requiredroles from "../../models/required-roles-schema.js";
 import CommandType from "../../util/CommandType.js";
 export default {
+    name: "requiredroles",
     description: "Sets what commands require what roles",
     type: CommandType.SLASH,
     guildOnly: true,

@@ -5,6 +5,7 @@ import CommandType from "../../util/CommandType.js";
 import { CommandObject, CommandUsage } from "../../../typings.js";
 
 export default {
+	name: "channelcommand",
 	description: "Specifies what commands can be ran inside of what channels",
 
 	type: CommandType.SLASH,
