@@ -35,8 +35,7 @@ class EventHandler {
       },
     };
 
-    this.readFiles();
-    this.registerEvents();
+    this.readFiles().then(() => this.registerEvents());
   }
 
   async readFiles() {

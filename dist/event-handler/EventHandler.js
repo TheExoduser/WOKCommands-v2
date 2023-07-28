@@ -26,8 +26,7 @@ class EventHandler {
                 isHuman: (message) => !message.author.bot,
             },
         };
-        this.readFiles();
-        this.registerEvents();
+        this.readFiles().then(() => this.registerEvents());
     }
     async readFiles() {
         const defaultEvents = await getAllFiles(path.join(__dirname, "events"), true);
