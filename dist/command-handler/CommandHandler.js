@@ -70,12 +70,12 @@ class CommandHandler {
             // Skip if not js file
             if (!filePath.endsWith(".js"))
                 continue;
-            const commandObject = fileData.fileContents;
+            let commandObject = fileData.fileContents;
             const split = filePath.split(/[\/\\]/);
             let commandName = split.pop();
             commandName = commandName.split(".")[0];
             const command = new Command(this._instance, commandName, commandObject);
-            const { description, type, testOnly, delete: del, aliases = [], name, init = () => { }, } = commandObject;
+            let { description, type, testOnly, delete: del, aliases = [], name, } = commandObject;
             let defaultCommandValue;
             for (const [key, value] of Object.entries(DefaultCommands)) {
                 if (value === name.toLowerCase()) {
@@ -102,7 +102,18 @@ class CommandHandler {
             for (const validation of validations) {
                 validation(command);
             }
-            await init(this._client, this._instance);
+            if ("init" in commandObject) {
+                const res = await commandObject.init(this._client, this._instance);
+                if (res) {
+                    commandObject = res;
+                    description = res.description;
+                    type = res.type;
+                    testOnly = res.testOnly;
+                    del = res.del;
+                    aliases = res.aliases;
+                    name = res.name;
+                }
+            }
             const names = [name, ...aliases];
             for (const n of names) {
                 this._commands.set(n, command);
