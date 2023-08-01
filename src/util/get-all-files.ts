@@ -1,6 +1,5 @@
 import fs from "fs";
 import p from "path";
-import { createRequire } from 'module';
 
 import { FileData } from "../../typings.js";
 

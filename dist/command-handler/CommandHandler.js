@@ -74,7 +74,7 @@ class CommandHandler {
             const split = filePath.split(/[\/\\]/);
             let commandName = split.pop();
             commandName = commandName.split(".")[0];
-            const command = new Command(this._instance, commandName, commandObject);
+            const command = new Command(this._instance, commandName, commandObject, filePath);
             let { description, type, testOnly, delete: del, aliases = [], name, } = commandObject;
             let defaultCommandValue;
             for (const [key, value] of Object.entries(DefaultCommands)) {
