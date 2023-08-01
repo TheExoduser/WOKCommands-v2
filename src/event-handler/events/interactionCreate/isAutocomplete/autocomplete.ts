@@ -20,7 +20,7 @@ export default async (interaction: AutocompleteInteraction, client: Client, inst
   }
 
   const focusedOption = interaction.options.getFocused(true);
-  const choices = await autocomplete(command, focusedOption.name, interaction);
+  const choices = await autocomplete(command, focusedOption.name, interaction, client, instance);
 
   const filtered = choices
     .filter((choice: AutocompleteChoice) => {
