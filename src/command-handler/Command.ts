@@ -4,15 +4,18 @@ class Command {
   private _instance: WOK;
   private _commandName: string;
   private _commandObject: CommandObject;
+  private _filePath: string;
 
   constructor(
     instance: WOK,
     commandName: string,
-    commandObject: CommandObject
+    commandObject: CommandObject,
+    filePath: string
   ) {
     this._instance = instance;
     this._commandName = commandName.toLowerCase();
     this._commandObject = commandObject;
+    this._filePath = filePath;
   }
 
   public get instance() {
@@ -25,6 +28,10 @@ class Command {
 
   public get commandObject() {
     return this._commandObject;
+  }
+
+  public get filePath() {
+    return this._filePath;
   }
 }
 

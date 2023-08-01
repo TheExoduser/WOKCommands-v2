@@ -106,7 +106,7 @@ class CommandHandler {
       let commandName = split.pop()!;
       commandName = commandName.split(".")[0];
 
-      const command = new Command(this._instance, commandName, commandObject)
+      const command = new Command(this._instance, commandName, commandObject, filePath)
 
       let {
           description,
