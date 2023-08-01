@@ -112,6 +112,8 @@ export interface CommandObject {
   init?: function
   description?: string
   name: string
+  category?: string
+  hidden?: boolean
   aliases?: string[]
   testOnly?: boolean
   guildOnly?: boolean
@@ -143,7 +145,9 @@ export class Command {
   constructor(instance: WOK, commandObject: CommandObject);
 
   public get instance(): WOK;
+  public get commandName(): string;
   public get commandObject(): CommandObject;
+  public get filePath(); string;
 }
 
 export { CommandObject, Command, CommandType, CooldownTypes, DefaultCommands }
